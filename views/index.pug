@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .container
+    .page-header
+      h1= title
+        small= ' v' + version
+    label Connect to Channel
+    .form-group.form-inline
+      .input-group
+        .input-group-addon ID
+        input.form-control#channelID(type='text', placeholder='1a2b3c4d')
+      button.btn.btn-primary#connectToChannel(type='submit') Join

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .container
+    .page-header
+      h1 Dashboard
+      
+    .row
+      .col-md-6
+        #userinformation
+          table.table
+            caption Welcome to your dashboard!
+            thead
+              tr
+                th User Information
+                th
+              tr
+            tbody
+              tr
+                th Username
+                td #{user.username}
+              tr
+                th E-Mail
+                td #{user.email}
+              tr
+                th Rang
+                td #{user.rang}
+              tr
+                th Online since
+                - var date = user.date.getHours() + ':' + user.date.getMinutes() + ' - ' + user.date.getDate() + '.' + (user.date.getMonth()+1) + '.' + user.date.getFullYear()
+                td= date
+      .md-col-6

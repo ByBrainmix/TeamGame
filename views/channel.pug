@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .container
+    .page-header
+      h1= game
+        small  Maximale Spieler: #{players}
+    .row-fluid
+      .col-md-8
+        p.lead Game
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            h3.panel-title Chat
+              p.text-muted#connectedAs
+          .panel-body#chatOutput
+          .panel-footer
+            .form-inline
+              .input-group
+                .input-group-addon Chat
+                input.form-control#textInput(type='text', placeholder='message')
+              button.btn.btn-default#btnSend Send
+  if(user)
+    p.hidden#username= user.username
+  script(src='/javascripts/channel.js')

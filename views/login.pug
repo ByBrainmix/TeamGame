@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-6
+        if error
+          .panel.panel-danger
+            .panel-heading
+              h3.panel-title ERROR
+            .panel-body
+              p#error= error
+        .panel.panel-info
+          .panel-heading
+            h3.panel-title Login
+          .panel-body
+            form(action='', method='post')
+              input(type="hidden", name="_csrf", value=csrfToken)
+              .form-group
+                label Username/E-Mail
+                input.form-control(type='text', name='username', placeholder='MaxMustermann', required= true)
+              .form-group
+                label Password
+                input.form-control(type='password', name='password', placeholder='12345', required=true)
+              input.btn.btn-default(type='submit', value='Log in')
+      .col-md-6

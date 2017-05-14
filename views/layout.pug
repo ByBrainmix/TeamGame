@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equive='X-UA-Compatible', content="IE=edge")
+    meta(name='viewport', content='width=devive-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='Florian Raith')
+    title TeamGame
+    //STYLES
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css')
+    link(rel='stylesheet', href='/stylesheets/sticky-footer-navbar.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    //SCRIPTS
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js')
+    script(src='/javascripts/bootbox.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/script.js')
+    title= title
+  body
+    //NAVBAR
+    nav(class='navbar navbar-default navbar-fixed-top')
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') TeamGame 
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-left
+            li(class=isCreate ? 'active' : '')
+              a(href='/create') Create new Game
+          if(user)
+            ul.nav.navbar-nav.navbar-left
+              if user.rang === 'Administrator'
+                li(class=isAdmin ? 'active' : '')
+                  a(href='/admin') Admin Panel
+            ul.nav.navbar-nav.navbar-right
+              li(class=isDashboard ? 'active' : '')
+                a(href='/dashboard', style='margin: 0 5px;')=user.username
+            a(href='/logout').btn.btn-default.navbar-btn.navbar-right LogOut
+          else
+            .btn-group.navbar-right(role='group')
+              a(href='/login').btn.btn-default.navbar-btn LogIn
+              a(href='/register').btn.btn-default.navbar-btn Register
+        
+    //CONTENT
+    block content
+    
+    //FOOTER
+    footer.footer.main-footer
+      .container
+        p.text-muted &copy;2016 Florian Raith
+    footer.footer.news
+      .container-fluid
+        p.text-muted.news-text
+          i *NEWS*
+        p#news closed Alpha v1.0

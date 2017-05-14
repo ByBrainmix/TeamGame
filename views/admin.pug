@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  .container
+    .page-header
+      h1 Administrator Panel
+    .row
+      .col-md-4
+        p.lead Accounts:
+        .form-group.form-inline
+          input.form-control(type='text', placeholder='search')
+          button.btn.btn-default(type='submit') Submit
+        #userList
+          .panel-group#accordion(role='tablist', aria-multiselectable='false')
+            - var n = 0;
+            each val, index in userMap
+              .panel.panel-default(id='mainPanel' + index)
+                - n++;
+                .panel-heading(id='heading'+n, role='tab')
+                  h4.panel-title
+                    a.user_name.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapse'+n, aria-expanded='false', aria-controls='collapse'+n)= val.username
+                .panel-collapse.collapse(id='collapse'+n, role='tabpanel', aria-labelledby='heading'+n)
+                  .panel-body(id='panel'+index)
+                    p.hidden.id= index
+                    p.hidden.name= val.username
+                    p.hidden.email= val.email
+                    p.hidden.rang= val.rang
+                    table.table
+                      tbody
+                        tr
+                          th ID
+                          td.user_id= index
+                        tr
+                          th E-Mail
+                          td.user_email= val.email
+                        tr
+                          th Rang
+                          td
+                            - var color = val.rang === 'Administrator' ? '#C70707' : 'black';
+                            p(style='display: inline; color: '+color+';')= val.rang + ' '
+                            button.btn.btn-default.btn-xs.changeRang(id='cr'+index) change rang
+                        tr
+                          th Online since
+                          - var date = val.date.getHours() + ':' + val.date.getMinutes() + ' - ' + val.date.getDate() + '.' + (val.date.getMonth()+1) + '.' + val.date.getFullYear()
+                          td.user_date= date
+                    button.btn.btn-danger.btn-sm.deleteUser(id='delete'+index) delet user
+                        
+      .col-md-4
+        p.lead Channels:
+        each val, index in channels
+          hr
+          p= index + ':'
+          each v, i in val
+            if(typeof v == 'object')
+              p ____players:
+              each v1, i1 in v
+                p= '________' + i1 + ': ' +v1
+            else
+              p= '____' + i + ': ' + v
+      .col-md-4
+  script(src='/javascripts/admin.js')
